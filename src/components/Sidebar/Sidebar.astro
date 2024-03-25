@@ -1,0 +1,107 @@
+<style>
+  .sidebar {
+    top: 0px;
+    right: 0px;
+    background-color: #070707;
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    z-index: 10001;
+    padding: 36px;
+    box-sizing: border-box;
+    transition: transform 0.5s ease;
+    transform: translateX(300px);
+  }
+
+  .translated {
+    top: 0px;
+    right: 0px;
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    z-index: 10001;
+    padding: 36px;
+    box-sizing: border-box;
+    transition: transform 0.5s ease;
+    transform: translateX(0px);
+    background-color: #070707;
+  }
+
+  .options {
+    list-style: none;
+    margin: 0px;
+    color: #ebe9e9;
+    font-family: "Montserrat";
+    margin-top: 16px;
+  }
+  .options > li {
+    padding: 10px;
+    border-left: 1px solid #070707;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .options > li:hover {
+    border-left: 3px solid #870009;
+    transition: all 0.3s;
+  }
+  .close {
+    color: #ebe9e9;
+    cursor: pointer;
+  }
+  .close-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  @media (width <=768px) {
+    .sidebar {
+      top: 0px;
+      right: 0px;
+      width: 250px;
+      transform: translateX(250px);
+      padding: 24px;
+      height: 100dvh;
+    }
+
+    .translated {
+      top: 0px;
+      right: 0px;
+      width: 250px;
+      padding: 24px;
+      transform: translateX(0px);
+      height: 100dvh;
+    }
+  }
+</style>
+
+<script>
+  const element: HTMLElement | any = document.querySelector("#sidebar");
+  element.addEventListener("click", () => {
+    element.classList.remove("translated");
+  });
+
+  const elements: HTMLElement[] | any = document.getElementsByName("sidebar");
+
+  elements.forEach((item: any) => {
+    item.addEventListener("click", (event: any) => {
+      const target = event?.target?.id.replace("-", "");
+      const section: HTMLElement | any = document.querySelector(`#${target}`);
+      section.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
+
+<div class="sidebar" id="sidebar">
+  <div class="close-container">
+    <img loading="lazy" src="/close.png" alt="mockup" width="18px" />
+  </div>
+  <ul class="options">
+    <li id="products-" name="sidebar">Productos</li>
+    <li id="footer-" name="sidebar">Métodos de pago</li>
+    <li id="footer-" name="sidebar">Contacto</li>
+    <li id="footer-" name="sidebar">Envíos</li>
+  </ul>
+</div>

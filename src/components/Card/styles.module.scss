@@ -1,0 +1,135 @@
+@import 'public/styles/index.scss';
+
+.card {
+    background-color: $gray;
+    border-radius: 4px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all .6s;
+    height: fit-content;
+    box-sizing: border-box;
+
+    &:hover {
+        transition: all .6s;
+        transform: scale(1.05);
+    }
+}
+
+.title {
+    color: $white;
+    font-family: 'Oswald', sans-serif;
+    max-width: 100%;
+    padding-right: 8px;
+    box-sizing: border-box;
+}
+
+.sizes {
+    color: $red;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.text {
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.price {
+    border: solid 1px $white;
+    display: flex;
+    border-radius: 4px;
+    height: 100%;
+    padding: 0.75rem;
+}
+
+.cardImage {
+    transition: all .6s;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.outImage {
+    animation: fade-out .6s linear forwards;
+}
+
+.inImage {
+    animation: fade-in .6s linear forwards;
+}
+
+.imageParent {
+    aspect-ratio: 1 / 1;
+}
+
+.img {
+    position: relative;
+    height: 100%;
+}
+
+.smallFont {
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@media (width <=768px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        width: 75%;
+        gap: 2rem;
+    }
+
+    .card {
+        padding: 16px;
+
+        &:hover {
+            transition: all .6s;
+            transform: scale(1);
+        }
+    }
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & img {
+
+        @media (width >=768px) {
+            display: none;
+        }
+    }
+
+    @media (width <=768px) {
+        margin-bottom: 8px;
+    }
+}

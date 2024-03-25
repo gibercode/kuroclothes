@@ -1,0 +1,25 @@
+---
+import styles from "./style.module.scss";
+---
+
+<script is:inline>
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.querySelector("#myBar").style.width = scrolled + "%";
+  }
+</script>
+
+<div class={styles.header}>
+  <div class={styles["progress-container"]}>
+    <div class={styles["progress-bar"]} id="myBar"></div>
+  </div>
+</div>

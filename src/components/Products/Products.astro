@@ -1,0 +1,145 @@
+---
+import Card from "../Card/Card.jsx";
+import styles from "./style.module.scss";
+
+const products = [
+  {
+    name: "Tanjiro Kamado",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "tanjiro-front",
+    back: "tanjiro-back",
+  },
+  {
+    name: "Inosuke Hashibira",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "inosuke-front",
+    back: "inosuke-back",
+  },
+  {
+    name: "Zenitsu Agatsuma",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "zenitsu-front",
+    back: "zenitsu-back",
+  },
+  {
+    name: "Demon Slayer Team",
+    type: "Oversized t-shirt",
+    price: "16$",
+    front: "kimetsu-front",
+    back: "kimetsu-back",
+  },
+  {
+    name: "Giyu Tomioka",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "tomioka-front",
+    back: "tomioka-back",
+  },
+  {
+    name: "Itachi Uchiha",
+    type: "Oversized t-shirt",
+    price: "16$",
+    front: "itachi-front",
+    back: "itachi-back",
+  },
+  {
+    name: "Kakashi Hatake",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "kakashi-front",
+    back: "kakashi-back",
+  },
+  {
+    name: "Naruto Uzumaki",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "naruto-front",
+    back: "naruto-back",
+  },
+  {
+    name: "Sasuke Uchiha",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "sasuke-front",
+    back: "sasuke-back",
+  },
+  {
+    name: "Monkey D. Luffy",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "luffy-front",
+    back: "luffy-back",
+  },
+  {
+    name: "Vinsmoke Sanji",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "sanji-front",
+    back: "sanji-back",
+  },
+  {
+    name: "Roronoa Zoro",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "zoro-front",
+    back: "zoro-back",
+  },
+  {
+    name: "One Piece Team",
+    type: "Oversized t-shirt",
+    price: "16$",
+    front: "onepiece-front",
+    back: "onepiece-back",
+  },
+
+  {
+    name: "Satoru Gojo",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "gojo-front",
+    back: "gojo-back",
+  },
+  {
+    name: "Ryomen Sukuna",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "sukuna-front",
+    back: "sukuna-back",
+  },
+  {
+    name: "Toge Inumaki",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "toge-front",
+    back: "toge-back",
+  },
+  {
+    name: "Eren Yeager",
+    type: "Classic t-shirt",
+    price: "15$",
+    front: "eren-front",
+    back: "eren-back",
+  },
+];
+
+type Product = {
+  name: string;
+  type: string;
+  price: string;
+  front: string;
+  back: string;
+};
+---
+
+<div class={styles.main} id="products">
+  <div class={styles.grid}>
+    {
+      products.map((item: Product, index: number) => (
+        <Card client:load {...item} key={index} />
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,64 @@
+@import 'public/styles/index.scss';
+
+$size: 24px;
+$mobileSize: 20px;
+
+.navbar {
+    position: fixed;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 3rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: $black;
+    box-sizing: border-box;
+
+    @media (width <=768px) {
+        padding: 0px 1.5rem;
+        height: 4rem;
+    }
+}
+
+.menu {
+    width: $size;
+    height: $size;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    @media (width < 768px) {
+        width: $mobileSize;
+        height: $mobileSize;
+    }
+}
+
+.line1 {
+    height: 2px;
+    width: 100%;
+    background: $white;
+}
+
+.line2 {
+    height: 2px;
+    width: 75%;
+    background: $white;
+}
+
+.line3 {
+    height: 2px;
+    width: 100%;
+    background: $white;
+}
+
+.logo {
+    width: 55px;
+
+    @media (width < 768px) {
+        width: 45px;
+    }
+}

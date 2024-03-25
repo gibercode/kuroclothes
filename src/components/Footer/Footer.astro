@@ -1,0 +1,89 @@
+---
+import styles from "./style.module.scss";
+---
+
+<script>
+  const elements: HTMLElement[] | any = document.getElementsByName("option");
+  elements.forEach((element: any) => {
+    element.addEventListener("click", (event: any) => {
+      const elementToOpen = `${event.target.id}-accordion`;
+      const element: HTMLElement | any = document.querySelector(
+        `#${elementToOpen}`
+      );
+
+      if (!element.style.display || element.style.display === "none")
+        return (element.style.display = "block");
+      element.style.display = "none";
+    });
+  });
+</script>
+
+<footer class={styles.main} id="footer">
+  <div>
+    <p class:list={styles.text} id="payment" name="option">Métodos de pago +</p>
+    <div class={styles.accordion} id="payment-accordion">
+      <ul>
+        <li>- Binance</li>
+        <li>- Pipol pay</li>
+        <li>- Pago móvil</li>
+        <li>- Airtm</li>
+        <li>- Zinli</li>
+        <li>- Efectivo</li>
+      </ul>
+    </div>
+    <p class={styles.text} name="option" id="send">Envíos +</p>
+    <div class={styles.accordion} id="send-accordion">
+      <ul>
+        <li>
+          Envíos a nivel nacional a través de MRW y Zoom (Cobro a destino)
+        </li>
+        <li>Entregas personales en el área de Caracas (Previo acuerdo)</li>
+        <li>Pick up: El Cafetal / La Castellana (Previo acuerdo)</li>
+      </ul>
+    </div>
+    <p class={styles.text} name="option" id="terms">Términos y condiciones +</p>
+    <div class={styles.accordion} id="terms-accordion">
+      <ul>
+        <li>- Los productos están sujetos a disponibilidad.</li>
+        <li>- No realizamos devoluciones ni reembolsos.</li>
+        <li>
+          - No nos hacemos responsables por daños causados por la empresa de
+          envío.
+        </li>
+        <li>
+          - Los pedidos personalizados deben solicitarse con 5 días hábiles de
+          anticipación.
+        </li>
+        <li>
+          - Los pedidos personalizados debe abonar 50% del costo del producto al
+          ser solicitado.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class={styles.media}>
+    <a href="https://www.instagram.com/kuroclothes.ve/" target="_blank">
+      <img
+        src="/instagram.png"
+        alt="instagram"
+        width={30}
+        class:list={[styles.icon, styles.separation]}
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+    <a
+      href=`https://wa.me/584164115541?text=Hola,%20me%20gustaría%20más%20información%20sobre%20sus%20productos!`
+      target="_blank"
+    >
+      <img
+        src="/whatsapp.png"
+        alt="whatsapp"
+        width={30}
+        class={styles.icon}
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+  </div>
+</footer>

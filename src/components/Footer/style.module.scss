@@ -1,0 +1,85 @@
+@import 'public/styles/index.scss';
+
+.main {
+    padding: 24px 60px;
+    box-sizing: border-box;
+}
+
+.text {
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 20px;
+    cursor: pointer;
+    width: fit-content;
+    transition: all .6s;
+    font-weight: 600;
+
+    &:hover {
+        color: rgba($color: $white, $alpha: 0.85);
+        transform: translate(-2px);
+        transition: all .6s;
+    }
+}
+
+.media {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.accordion {
+    display: none;
+    transition: all .6s;
+
+    & ul {
+        list-style: none;
+        margin: 0;
+        padding: 8px 12px;
+        box-sizing: border-box;
+    }
+
+    & ul>li {
+        color: $white;
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 12px;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+.icon {
+    cursor: pointer;
+    transition: all .4s;
+
+    &:hover {
+        transition: all .4s;
+        transform: translateY(-3px);
+    }
+}
+
+.separation {
+    margin-right: 12px;
+}
+
+.subText {
+    font-size: 14px;
+    margin-left: 8px;
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 12px;
+}
+
+@media (width <=768px) {
+    .main {
+        padding: 0px 24px 24px 24px;
+    }
+
+    .media {
+        margin-top: 24px;
+    }
+
+    .separation {
+        margin-right: 16px;
+    }
+}

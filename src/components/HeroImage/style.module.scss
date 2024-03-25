@@ -1,0 +1,131 @@
+@import 'public/styles/index.scss';
+
+$title: 13.5rem;
+$subtitle: 8.125rem;
+
+.main {
+  height: 100vh;
+  background-color: $black;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem;
+  box-sizing: border-box;
+  flex-direction: column;
+  position: relative;
+}
+
+.title {
+  font-size: $title;
+  color: $white;
+  font-family: 'Oswald', sans-serif;
+  line-height: 13.75rem;
+  animation: fade-in-title 1s linear forwards;
+}
+
+.titlevariant {
+  @extend .title;
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: $white;
+  animation: fade-in 1s linear forwards;
+}
+
+.subtitle {
+  font-size: $subtitle;
+  margin: 0;
+  color: $red;
+  font-family: 'Noto Sans JP', sans-serif;
+  position: absolute;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  right: 0px;
+  animation: fade-in-kanji 1s linear forwards;
+}
+
+.icon_container {
+  position: absolute;
+  bottom: 0px;
+  transform: translate(-50%, -25%);
+  left: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  transition: all 0.6s;
+  padding: 0.75rem;
+  border-radius: 50%;
+
+  &:hover {
+    bottom: -0.625rem;
+    transition: all 0.6s;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+}
+
+@media (width <=768px) {
+  .title {
+    font-size: 5rem;
+    line-height: 6rem;
+    text-align: center;
+  }
+
+  .titlevariant {
+    font-size: 5rem;
+    line-height: 6rem;
+    text-align: center;
+  }
+
+  .main {
+    align-items: center;
+    height: 100dvh;
+  }
+
+  .subtitle {
+    display: block;
+    font-size: 3.5rem;
+    writing-mode: horizontal-tb;
+    position: relative;
+    bottom: 0rem;
+    animation: fade-in 1s linear forwards;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    margin-top: 20px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+@keyframes fade-in-title {
+  from {
+    opacity: 0;
+    margin-top: -20px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+
+@keyframes fade-in-kanji {
+  from {
+    opacity: 0;
+    bottom: 20px;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 2.5rem;
+    ;
+  }
+}

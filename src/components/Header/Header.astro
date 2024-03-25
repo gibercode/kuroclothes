@@ -1,0 +1,34 @@
+---
+import Progress from "../ProgressBar/Progress.astro";
+import styles from "./style.module.scss";
+import Sidebar from "../Sidebar/Sidebar.astro";
+---
+
+<style is:inline></style>
+
+<script>
+  const elemento: HTMLElement | any = document.querySelector("#toggle");
+  elemento.addEventListener("click", function () {
+    const element: HTMLElement | any = document.querySelector("#sidebar");
+    const classes = [...element.classList];
+    element.classList.toggle("translated");
+  });
+</script>
+
+<Progress />
+<nav class={styles.navbar}>
+  <img
+    src="/logo.png"
+    alt="logo"
+    class={styles.logo}
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div class={styles.menu} id="toggle">
+    <div class={styles.line1}></div>
+    <div class={styles.line2}></div>
+    <div class={styles.line3}></div>
+  </div>
+</nav>
+<Sidebar />
