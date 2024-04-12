@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
-import { Image } from "astro:assets";
 
 const Card = ({ name, type, price, front, back }: any) => {
   const [currentImage, setCurrentImage] = useState<string | null>(null);
@@ -65,8 +64,8 @@ const Card = ({ name, type, price, front, back }: any) => {
       <div className={styles.img}>
         <div className={styles.imageParent}>
           <img
-            src={`/products/${front}.png`}
-            alt="mockup"
+            src={front}
+            alt={`${name} front`}
             width="100%"
             height="100%"
             style={{ zIndex: 2 }}
@@ -79,8 +78,8 @@ const Card = ({ name, type, price, front, back }: any) => {
             decoding="async"
           />
           <img
-            src={`/products/${back}.png`}
-            alt="mockup"
+            src={back}
+            alt={`${name} back`}
             width="100%"
             height="100%"
             className={`${styles.cardImage} ${
