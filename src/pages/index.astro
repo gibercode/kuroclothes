@@ -11,7 +11,7 @@ import Footer from "../components/Footer/Footer.astro";
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js";
   const firebaseConfig = {
-    apiKey: "AIzaSyDrppO5v2qm35sjFr04uY8q5YQrYbmcrsE",
+    apiKey: import.meta.env.ANALYTICS_KEY,
     authDomain: "kuro-chlotes.com",
     projectId: "kuro-chlotes",
     storageBucket: "kuro-chlotes.appspot.com",
