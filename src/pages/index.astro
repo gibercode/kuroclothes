@@ -5,6 +5,102 @@ import Header from "../components/Header/Header.astro";
 import Products from "../components/Products/Products.astro";
 import Box from "../layouts/Box.astro";
 import Footer from "../components/Footer/Footer.astro";
+import cryptojs from "crypto-js";
+import * as crypto from "crypto";
+
+try {
+  // const payload: any = {
+  //   env: {
+  //     terminalType: "APP",
+  //   },
+  //   orderTags: {
+  //     ifProfitSharing: true,
+  //   },
+  //   merchantTradeNo: "9825382937292",
+  //   orderAmount: 25.17,
+  //   currency: "USDT",
+  //   description: "very good Ice Cream",
+  //   good: [
+  //     {
+  //       goodsType: "01",
+  //       goodsCategory: "3000",
+  //       referenceGoodsId: "7876763A3B",
+  //       goodsName: "Ice Cream",
+  //       goodsDetail: "Greentea ice cream cone",
+  //     },
+  //   ],
+  // };
+
+  const payload: any = {
+    env: {
+      terminalType: "APP",
+    },
+    orderTags: {
+      ifProfitSharing: true,
+    },
+    merchantTradeNo: "9825382937292",
+    orderAmount: 25.17,
+    currency: "USDT",
+    description: "very good Ice Cream",
+    goods: [
+      {
+        goodsType: "01",
+        goodsCategory: "D000",
+        referenceGoodsId: "7876763A3B",
+        goodsName: "Ice Cream",
+        goodsDetail: "Greentea ice cream cone",
+      },
+    ],
+  };
+
+  const timestamp = Date.now();
+  const payload_to_sign =
+    timestamp +
+    "\n" +
+    "zyYoCikPLVpIQihmclkDuPEgJpyYKWuO" +
+    "\n" +
+    payload +
+    "\n";
+
+  const signature = (query_string: string) => {
+    const result = crypto
+      .createHmac(
+        "sha512",
+        "dblzvjsrtolhlwlqhaaq4sibhgjampj3avhhzhr3shas1ydet7lelji8ubg5tws6"
+      )
+      .update(query_string)
+      .digest("hex");
+
+    return result;
+  };
+
+  // const signature: string = cryptojs
+  //   .HmacSHA512(
+  //     payload,
+  //     "dblzvjsrtolhlwlqhaaq4sibhgjampj3avhhzhr3shas1ydet7lelji8ubg5tws6"
+  //   )
+  //   .toString(cryptojs.enc.Hex);
+  // console.log("🚀 ~ signature:", signature);
+
+  const response = await fetch(
+    "https://bpay.binanceapi.com/binancepay/openapi/v3/order",
+    {
+      method: "POST",
+      body: payload,
+      headers: {
+        "Content-Type": "application/json",
+        "BinancePay-Timestamp": `${timestamp}`,
+        "BinancePay-Nonce": "zyYoCikPLVpIQihmclkDuPEgJpyYKWuO",
+        "BinancePay-Certificate-SN":
+          "chgfziqfvwoerl85npxgqk36frmzm24ykabovk8bjmv8noml9j6yjq8cxwiogt4c",
+        "BinancePay-Signature": signature(payload_to_sign).toUpperCase(),
+      },
+    }
+  );
+  console.log("🚀 ~ response:", await response.json());
+} catch (err) {
+  console.log("🚀 ~ err:", err);
+}
 ---
 
 <script type="module">
