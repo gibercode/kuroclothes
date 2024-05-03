@@ -14,7 +14,7 @@
     "@astrojs/preact": "^3.2.0",
     "@types/react": "^18.0.21",
     "astro": "^3.5.3",
-    "contentful": "^10.8.7",
+    "contentful": "^10.9.2",
     "crypto-js": "^4.2.0",
     "framer-motion": "^10.16.5",
     "install": "^0.13.0",
