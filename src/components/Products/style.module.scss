@@ -20,15 +20,21 @@
 	background: $gray;
 }
 
-@media (width <=768px) {
+@media (width <=992px) {
+	.grid {
+		width: 90%;
+		gap: 1.5rem;
+	}
+}
 
+@media (width <=768px) {
 	.main {
-		padding: 4.2rem 0rem;
+		padding: 3rem 0rem;
 	}
 
 	.grid {
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		width: 75%;
+		width: 90%;
 		gap: 2rem;
 	}
 }

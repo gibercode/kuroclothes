@@ -1,0 +1,59 @@
+@import '../../../public/styles/index.scss';
+
+.toast {
+    background: $black;
+    border-radius: 0.25rem;
+    position: fixed;
+    bottom: -12rem;
+    left: 50%;
+    z-index: 10040;
+    padding: 1rem;
+    max-width: 18.75rem;
+    transform: translate(-50%, -0%);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+@media (width <=768px) {
+    .toast {
+        width: 85%;
+    }
+}
+
+.toastIn {
+    @extend .toast;
+    animation: slide-in .6s ease-in-out forwards;
+}
+
+.toastOut {
+    @extend .toast;
+    animation: slide-out .6s ease-in-out forwards;
+}
+
+.text {
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+}
+
+
+@keyframes slide-out {
+    from {
+        bottom: 0.9375rem;
+    }
+
+    to {
+        bottom: -12rem;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        bottom: -12rem;
+    }
+
+    to {
+        bottom: 0.9375rem;
+    }
+}

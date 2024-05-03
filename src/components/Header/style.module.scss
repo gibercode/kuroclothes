@@ -17,8 +17,13 @@ $mobileSize: 20px;
     background-color: $black;
     box-sizing: border-box;
 
+    @media (width <=996px) {
+        padding: 0px 5%;
+        height: 4rem;
+    }
+
     @media (width <=768px) {
-        padding: 0px 1.5rem;
+        padding: 0px 7.5%;
         height: 4rem;
     }
 }
@@ -38,27 +43,27 @@ $mobileSize: 20px;
 }
 
 .line1 {
-    height: 2px;
+    height: 0.125rem;
     width: 100%;
     background: $white;
 }
 
 .line2 {
-    height: 2px;
+    height: 0.125rem;
     width: 75%;
     background: $white;
 }
 
 .line3 {
-    height: 2px;
+    height: 0.125rem;
     width: 100%;
     background: $white;
 }
 
 .logo {
-    width: 55px;
+    width: 3.4375rem;
 
     @media (width < 768px) {
-        width: 45px;
+        width: 2.8125rem;
     }
 }

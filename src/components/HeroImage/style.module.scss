@@ -64,6 +64,24 @@ $subtitle: 8.125rem;
   }
 }
 
+@media (width <=992px) {
+  .title {
+    font-size: 10rem;
+    line-height: 11rem;
+    text-align: center;
+  }
+
+  .titlevariant {
+    font-size: 10rem;
+    line-height: 11rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 8rem;
+  }
+}
+
 @media (width <=768px) {
   .title {
     font-size: 5rem;
