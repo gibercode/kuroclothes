@@ -1,7 +1,7 @@
-import contentful from "contentful";
+import { createClient } from "contentful";
 
-export const contentfulClient = contentful.createClient({
-  space: import.meta.env.CONTENTFUL_SPACE_ID,
-  accessToken: import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
+export const contentfulClient = createClient({
+  space: import.meta.env.PUBLIC_CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.PUBLIC_CONTENTFUL_DELIVERY_TOKEN,
   host: "cdn.contentful.com",
 });

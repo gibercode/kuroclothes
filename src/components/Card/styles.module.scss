@@ -5,13 +5,16 @@
     border-radius: 4px;
     padding: 24px;
     cursor: pointer;
-    transition: all .6s;
     height: fit-content;
     box-sizing: border-box;
+    transition: all .6s;
 
     &:hover {
-        transition: all .6s;
         transform: scale(1.05);
+    }
+
+    &:hover .openDetail {
+        animation: fade-in .6s linear forwards;
     }
 }
 
@@ -79,6 +82,25 @@
     margin-right: 8px;
 }
 
+$size: 1.875rem;
+
+
+.openDetail {
+    background-color: $black;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    width: $size;
+    height: $size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s;
+
+    &:hover {
+        transform: scale(1.03);
+    }
+}
+
 @keyframes fade-out {
     from {
         opacity: 1;
@@ -98,7 +120,6 @@
         opacity: 1;
     }
 }
-
 
 @media (width <=768px) {
     .grid {
@@ -121,15 +142,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    & img {
-
-        @media (width >=768px) {
-            display: none;
-        }
-    }
+    height: 1.875rem;
 
     @media (width <=768px) {
         margin-bottom: 8px;
+        height: auto;
     }
 }
