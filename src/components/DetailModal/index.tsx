@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useState, useRef, useEffect } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import { Toast } from "../Toast";
@@ -16,6 +16,7 @@ export const DetailModal = ({ product, onClose }: any) => {
   const handleMainImage = (image: string) => setMainImage(image);
   const handleSize = (size: string) => setSize(size);
   const [status, setStatus] = useState(0);
+  const timeout = useRef<any>(null);
 
   const handleAdd = () => {
     if (counter >= 1)
@@ -37,15 +38,20 @@ export const DetailModal = ({ product, onClose }: any) => {
 
   const handleToast = () => {
     setStatus(1);
-    setTimeout(() => {
+    timeout.current = setTimeout(() => {
       setStatus(2);
     }, 3000);
   };
 
-  const buyProduct = async (): Promise<any> => {
-    const uuid = uuidv4();
-    const id = uuid.replaceAll("-", "");
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeout.current);
+    };
+  }, []);
 
+  const buyProduct = async (): Promise<any> => {
+    const uuid: any = uuidv4();
+    const id = uuid.replaceAll("-", "");
     const payload: any = {
       env: {
         terminalType: "APP",
@@ -95,9 +101,7 @@ export const DetailModal = ({ product, onClose }: any) => {
     }
   };
 
-  const handleSeeMore = (): void => {
-    setOpened((prev: boolean) => !prev);
-  };
+  const handleSeeMore = (): void => setOpened((prev: boolean) => !prev);
 
   return (
     <div className={styles.overlay}>
@@ -152,7 +156,7 @@ export const DetailModal = ({ product, onClose }: any) => {
                 </p>
               </div>
               <p className={styles.seeMore} onClick={handleSeeMore}>
-                Ver más +
+                Ver {!opened ? "más +" : "menos -"}
               </p>
 
               <div className={styles.sizeContainer}>

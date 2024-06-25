@@ -1,8 +1,5 @@
----
-import Layout from "../layouts/Layout.astro";
----
-
-<style is:inline>
+<!DOCTYPE html>
+<style>
   @import "../../public/styles/index.scss";
   .main {
     background-color: #070707;
@@ -60,21 +57,40 @@ import Layout from "../layouts/Layout.astro";
     }
   }
 </style>
-
-<Layout title="Kuro | clothes">
-  <div class="main">
-    <img
-      src="/logo-text.png"
-      alt="logo"
-      class="logo"
-      loading="lazy"
-      decoding="async"
-      width="200px"
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="Kuro clothes" content="Astro v3.6.5" />
+    <title>Kuro | clothes</title>
+    <meta
+      name="description"
+      content="Somos una marca de ropa y accesorios apasionada por el mundo del anime, videojuegos y series con afición por la cultura Japonesa"
     />
-    <h1 class="title">¡Gracias por tu compra!</h1>
-    <h2 class="subtitle">ありがとう!</h2>
-    <a href="/" rel="noreferrer">
-      <button class="goback-btn" id="goback">Ir al inicio</button>
-    </a>
-  </div>
-</Layout>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <img
+        src="/logo-text.png"
+        alt="logo"
+        class="logo"
+        loading="lazy"
+        decoding="async"
+        width="200px"
+      />
+      <h1 class="title">¡Gracias por tu compra!</h1>
+      <h2 class="subtitle">ありがとう!</h2>
+      <a href="/" rel="noreferrer"
+        ><button class="goback-btn" id="goback">Ir al inicio</button></a
+      >
+    </div>
+  </body>
+</html>

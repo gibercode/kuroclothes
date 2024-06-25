@@ -5,7 +5,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 5rem 0rem;
+	padding: 7rem 0rem 5rem 0rem;
 	box-sizing: border-box;
 }
 
@@ -29,7 +29,7 @@
 
 @media (width <=768px) {
 	.main {
-		padding: 3rem 0rem;
+		padding: 5rem 0rem 3rem 0rem;
 	}
 
 	.grid {
