@@ -14,7 +14,7 @@ const Card = ({ name, type, price, front, back, size }: any) => {
     desktopMediaQuery.addEventListener("change", (event) => {
       const { matches } = event;
       if (matches) {
-        setCurrentImage("back");
+        setCurrentImage(back ? "back" : "front");
         handleMobile(true);
         return;
       }
@@ -24,7 +24,7 @@ const Card = ({ name, type, price, front, back, size }: any) => {
 
     if (window.innerWidth < 768) {
       setIsMobile(true);
-      setCurrentImage("back");
+      setCurrentImage(back ? "back" : "front");
     }
 
     return () => {
@@ -51,12 +51,14 @@ const Card = ({ name, type, price, front, back, size }: any) => {
     <>
       <div
         className={styles.card}
-        onMouseEnter={!isMobile ? () => setCurrentImage("back") : () => {}}
+        onMouseEnter={
+          !isMobile && back ? () => setCurrentImage("back") : () => {}
+        }
         onMouseLeave={!isMobile ? () => setCurrentImage("front") : () => {}}
         onClick={selectProduct}
       >
         <div className={styles.cardHeader}>
-          <p className={styles.sizes}>S / M / L</p>
+          <p className={styles.sizes}>{size || "S / M / L"}</p>
           <div style={{ display: "flex" }}>
             {(currentImage === "back" || isMobile) && (
               <div className={styles.openDetail} onClick={selectProduct}>
@@ -76,7 +78,7 @@ const Card = ({ name, type, price, front, back, size }: any) => {
               src={front}
               alt={`${name} front`}
               width="100%"
-              height="100%"
+              height={back ? "100%" : "auto"}
               style={{ zIndex: 2 }}
               className={`${styles.cardImage} ${
                 currentImage === "back"
@@ -86,19 +88,22 @@ const Card = ({ name, type, price, front, back, size }: any) => {
               loading="lazy"
               decoding="async"
             />
-            <img
-              src={back}
-              alt={`${name} back`}
-              width="100%"
-              height="100%"
-              className={`${styles.cardImage} ${
-                currentImage === "back"
-                  ? styles.inImage
-                  : currentImage && styles.outImage
-              }`}
-              loading="lazy"
-              decoding="async"
-            />
+
+            {back && (
+              <img
+                src={back}
+                alt={`${name} back`}
+                width="100%"
+                height="100%"
+                className={`${styles.cardImage} ${
+                  currentImage === "back"
+                    ? styles.inImage
+                    : currentImage && styles.outImage
+                }`}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
           </div>
         </div>
         <div>

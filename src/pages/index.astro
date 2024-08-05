@@ -5,11 +5,13 @@ import Header from "../components/Header/Header.astro";
 import Products from "../components/Products/Products.astro";
 import Box from "../layouts/Box.astro";
 import Footer from "../components/Footer/Footer.astro";
+import { Tabs } from "../components/Tabs";
 ---
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js";
+
   const firebaseConfig = {
     apiKey: import.meta.env.ANALYTICS_KEY,
     authDomain: "kuro-chlotes.com",
@@ -19,6 +21,7 @@ import Footer from "../components/Footer/Footer.astro";
     appId: "1:224414328297:web:aeac27187811750a089778",
     measurementId: "G-Q0FL7YXVD7",
   };
+
   const app = initializeApp(firebaseConfig);
   getAnalytics(app);
 </script>
@@ -47,6 +50,7 @@ import Footer from "../components/Footer/Footer.astro";
   </Box>
   <div class="image"></div>
   <Box>
+    <Tabs client:load />
     <Products />
     <Footer />
   </Box>
