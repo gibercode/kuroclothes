@@ -1,9 +1,9 @@
 ---
-import Card from "../Card/Card.jsx";
-import styles from "./style.module.scss";
-import { contentfulClient, normalizeProduct } from "../../utils";
+import { contentfulClient } from "../../utils";
+import { ProductList } from "../../components/ProductList";
 
-let data = [];
+let data: any = [];
+
 try {
   const { items } = await contentfulClient.getEntries<any>({
     content_type: "kuroClothes",
@@ -15,13 +15,4 @@ try {
 }
 ---
 
-<div class={styles.main} id="products">
-  <div class={styles.grid}>
-    {
-      data.map((item: any, index: number) => {
-        const product = normalizeProduct(item);
-        return <Card client:load {...product} key={index} />;
-      })
-    }
-  </div>
-</div>
+<ProductList initialData={data} client:load />

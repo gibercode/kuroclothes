@@ -3,13 +3,20 @@ import styles from "./styles.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import { Toast } from "../Toast";
 import { devices } from "../../utils";
+import { UseCategory } from "../../hooks";
+import { dictionary } from "../../utils";
 
 export const DetailModal = ({ product, onClose }: any) => {
+  const { currentType } = UseCategory();
   const basePrice = parseInt(product?.price?.replace("$", ""));
   const [price, setPrice] = useState(basePrice);
-  const sizes = (product?.size || "")?.split(" /");
+  const sizes = product?.size.includes("/")
+    ? product?.size.split(" /")
+    : product?.size;
   const [counter, setCounter] = useState(1);
-  const [currentSize, setSize] = useState("S");
+  const [currentSize, setSize] = useState(
+    product?.size.includes("/") ? "S" : product?.size
+  );
   const [mainImage, setMainImage] = useState(product?.front);
   const [loading, setLoading] = useState(false);
   const [opened, setOpened] = useState(false);
@@ -114,30 +121,38 @@ export const DetailModal = ({ product, onClose }: any) => {
             <div className={styles.mainImage}>
               <img src={mainImage} width="100%" />
             </div>
-            <div className={styles.images}>
-              <div
-                className={styles.imageContainer}
-                onClick={() => handleMainImage(product.front)}
-              >
-                <img src={product?.front} width={85} />
-              </div>
-              <div
-                className={styles.imageContainer}
-                onClick={() => handleMainImage(product.back)}
-              >
-                <img src={product?.back} width={85} />
-              </div>
-            </div>
+
+            {product?.back && (
+              <>
+                <div className={styles.images}>
+                  <div
+                    className={styles.imageContainer}
+                    onClick={() => handleMainImage(product.front)}
+                  >
+                    <img src={product?.front} width={85} />
+                  </div>
+                  <div
+                    className={styles.imageContainer}
+                    onClick={() => handleMainImage(product.back)}
+                  >
+                    <img src={product?.back} width={85} />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <div className={styles.content}>
             <div>
               <div className={styles.titleContainer}>
                 <h2 className={styles.title}>{product?.name}</h2>
-                <p className={styles.text}>({product?.type})</p>
+                {product?.type && (
+                  <p className={styles.text}>({product?.type})</p>
+                )}
               </div>
               <p className={styles.margintext}>
-                Franela 100% de algodon, cuello redondo. Su tejido suave y
-                transpirable te mantendrá fresco y cómodo durante todo el día.
+                {dictionary[currentType]} 100% de algodón, cuello redondo. Su
+                tejido suave y transpirable te mantendrá fresco y cómodo durante
+                todo el día.
               </p>
 
               <div
@@ -160,16 +175,20 @@ export const DetailModal = ({ product, onClose }: any) => {
               </p>
 
               <div className={styles.sizeContainer}>
-                {sizes.map((size: string) => (
-                  <div
-                    className={
-                      currentSize === size ? styles.sizeSelected : styles.size
-                    }
-                    onClick={() => handleSize(size)}
-                  >
-                    <h2 className={styles.text}>{size}</h2>
-                  </div>
-                ))}
+                {Array.isArray(sizes) ? (
+                  sizes.map((size: string) => (
+                    <div
+                      className={
+                        currentSize === size ? styles.sizeSelected : styles.size
+                      }
+                      onClick={() => handleSize(size)}
+                    >
+                      <h2 className={styles.text}>{size}</h2>
+                    </div>
+                  ))
+                ) : (
+                  <p className={styles.uniqueSize}>{sizes}</p>
+                )}
               </div>
               <div className={styles.quantity}>
                 <button onClick={handleMinus}>-</button>

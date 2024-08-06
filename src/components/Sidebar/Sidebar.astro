@@ -79,7 +79,9 @@
 
 <script>
   const element: HTMLElement | any = document.querySelector("#sidebar");
-  element.addEventListener("click", () => {
+  const closeBtn: any = document.querySelector("#close-btn");
+
+  closeBtn.addEventListener("click", () => {
     element.classList.remove("translated");
   });
 
@@ -90,13 +92,20 @@
       const target = event?.target?.id.replace("-", "");
       const section: HTMLElement | any = document.querySelector(`#${target}`);
       section.scrollIntoView({ behavior: "smooth" });
+      element.classList.remove("translated");
     });
   });
 </script>
 
 <div class="sidebar" id="sidebar">
   <div class="close-container">
-    <img loading="lazy" src="/close.png" alt="mockup" width="18px" />
+    <img
+      loading="lazy"
+      src="/close.png"
+      alt="mockup"
+      width="18px"
+      id="close-btn"
+    />
   </div>
   <ul class="options">
     <li id="products-" name="sidebar">Productos</li>

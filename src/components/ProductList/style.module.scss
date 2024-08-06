@@ -1,0 +1,48 @@
+@import 'public/styles/index.scss';
+
+.main {
+    background-color: $black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0rem 5rem 0rem;
+    box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.525rem;
+    width: 85%;
+}
+
+.img {
+    background: $gray;
+}
+
+@media (width <=992px) {
+    .grid {
+        width: 90%;
+        gap: 1.5rem;
+    }
+}
+
+@media (width <=768px) {
+    .main {
+        padding: 3rem 0rem 3rem 0rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        width: 90%;
+        gap: 2rem;
+    }
+}
+
+@media (width <=576px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        width: 85%;
+        gap: 2rem;
+    }
+}

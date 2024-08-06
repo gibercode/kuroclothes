@@ -1,20 +1,34 @@
-import { useState, useEffect } from "preact/hooks";
+import { useState, useEffect, useMemo } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { DetailModal } from "../DetailModal";
+import { UseCategory } from "../../hooks";
 
-const Card = ({ name, type, price, front, back, size }: any) => {
+const Card = ({
+  name,
+  type,
+  price,
+  front,
+  back,
+  size,
+}: Record<string, any>) => {
+  const { currentType } = UseCategory();
   const [currentImage, setCurrentImage] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [product, setProduct] = useState<any>(null);
 
   const handleMobile = (state: boolean) => setIsMobile(state);
 
+  useMemo(() => {
+    if (isMobile && currentType === "t-shirt") return setCurrentImage("back");
+    if (currentImage !== "t-shirt") setCurrentImage(null);
+  }, [currentType, isMobile]);
+
   useEffect(() => {
     const desktopMediaQuery = window.matchMedia("(max-width: 768px)");
     desktopMediaQuery.addEventListener("change", (event) => {
       const { matches } = event;
       if (matches) {
-        setCurrentImage("back");
+        setCurrentImage(back ? "back" : "front");
         handleMobile(true);
         return;
       }
@@ -24,19 +38,13 @@ const Card = ({ name, type, price, front, back, size }: any) => {
 
     if (window.innerWidth < 768) {
       setIsMobile(true);
-      setCurrentImage("back");
+      setCurrentImage(back ? "back" : "front");
     }
 
     return () => {
       desktopMediaQuery.removeEventListener("change", () => {});
     };
   }, []);
-
-  const handleImage = () => {
-    currentImage === "back"
-      ? setCurrentImage("front")
-      : setCurrentImage("back");
-  };
 
   const selectProduct = () => {
     const localProduct = { name, type, price, front, back, size };
@@ -47,18 +55,38 @@ const Card = ({ name, type, price, front, back, size }: any) => {
     setProduct(null);
   };
 
+  const handleStyles = () => {
+    if (!currentImage) return null;
+    if (isMobile && currentType === "t-shirt") return `${styles.outNoFade}`;
+    if (currentImage === "back" && back && !isMobile) return styles.outImage;
+    if (currentImage === "front" && back && !isMobile) return styles.inImage;
+  };
+
+  const handleOut = () => {
+    if (!currentImage) return null;
+    if (isMobile && currentType === "t-shirt") return null;
+    if (currentImage === "back" && back && !isMobile) return styles.inImage;
+    if (currentImage === "front" && back && !isMobile) return styles.outImage;
+  };
+
   return (
     <>
       <div
         className={styles.card}
-        onMouseEnter={!isMobile ? () => setCurrentImage("back") : () => {}}
+        onMouseEnter={
+          !isMobile
+            ? () => setCurrentImage(back ? "back" : "only-front")
+            : () => {}
+        }
         onMouseLeave={!isMobile ? () => setCurrentImage("front") : () => {}}
         onClick={selectProduct}
       >
         <div className={styles.cardHeader}>
-          <p className={styles.sizes}>S / M / L</p>
+          <p className={styles.sizes}>{size || "S / M / L"}</p>
           <div style={{ display: "flex" }}>
-            {(currentImage === "back" || isMobile) && (
+            {(currentImage === "back" ||
+              isMobile ||
+              currentImage === "only-front") && (
               <div className={styles.openDetail} onClick={selectProduct}>
                 <img
                   src="/plus.png"
@@ -76,29 +104,24 @@ const Card = ({ name, type, price, front, back, size }: any) => {
               src={front}
               alt={`${name} front`}
               width="100%"
-              height="100%"
+              height={back ? "100%" : "auto"}
               style={{ zIndex: 2 }}
-              className={`${styles.cardImage} ${
-                currentImage === "back"
-                  ? styles.outImage
-                  : currentImage && styles.inImage
-              }`}
+              className={`${styles.cardImage} ${handleStyles()}`}
               loading="lazy"
               decoding="async"
             />
-            <img
-              src={back}
-              alt={`${name} back`}
-              width="100%"
-              height="100%"
-              className={`${styles.cardImage} ${
-                currentImage === "back"
-                  ? styles.inImage
-                  : currentImage && styles.outImage
-              }`}
-              loading="lazy"
-              decoding="async"
-            />
+
+            {back && (
+              <img
+                src={back}
+                alt={`${name} back`}
+                width="100%"
+                height="100%"
+                className={`${styles.cardImage} ${handleOut()}`}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
           </div>
         </div>
         <div>
