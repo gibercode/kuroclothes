@@ -13,11 +13,11 @@ export const ProductList = ({ initialData = [] }) => {
   };
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} id="products">
       <div className={styles.grid}>
         {filterProducts(initialData).map((item, index) => {
           const product = normalizeProduct(item);
-          return <Card {...product} key={index} />;
+          return <Card {...{ ...product, ...{ key: index } }} />;
         })}
       </div>
     </div>

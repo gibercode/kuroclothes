@@ -1,5 +1,7 @@
 @import 'public/styles/index.scss';
 
+$size: 1.875rem;
+
 .card {
     background-color: $gray;
     border-radius: 4px;
@@ -58,6 +60,12 @@
     position: absolute;
     top: 0px;
     left: 0px;
+
+
+}
+
+.outNoFade {
+    opacity: 0;
 }
 
 .outImage {
@@ -82,9 +90,6 @@
     margin-right: 8px;
 }
 
-$size: 1.875rem;
-
-
 .openDetail {
     background-color: $black;
     border-radius: 0.25rem;
@@ -99,6 +104,10 @@ $size: 1.875rem;
     &:hover {
         transform: scale(1.03);
     }
+}
+
+.overAll {
+    z-index: 999;
 }
 
 @keyframes fade-out {
@@ -122,6 +131,11 @@ $size: 1.875rem;
 }
 
 @media (width <=768px) {
+
+    .cardImage {
+        transition: none;
+    }
+
     .grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         width: 75%;

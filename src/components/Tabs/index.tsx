@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { $productCategory } from "../../store/productCategory";
 

@@ -4,11 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Toast } from "../Toast";
 import { devices } from "../../utils";
 import { UseCategory } from "../../hooks";
-
-const dictionary: Record<string, string> = {
-  tshirt: "Franela",
-  top: "Top",
-};
+import { dictionary } from "../../utils";
 
 export const DetailModal = ({ product, onClose }: any) => {
   const { currentType } = UseCategory();

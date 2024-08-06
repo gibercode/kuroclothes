@@ -9,3 +9,8 @@ export const devices = [
   "Opera",
   "Mini",
 ];
+
+export const dictionary: Record<string, string> = {
+  "t-shirt": "Franela",
+  top: "Top",
+};

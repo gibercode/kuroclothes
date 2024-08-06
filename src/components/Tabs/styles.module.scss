@@ -21,7 +21,7 @@ input[type="radio"] {
 
 .container {
     background-color: $black;
-    width: 40%;
+    width: 35%;
     padding: 1rem;
     flex-direction: column;
     @include flexcenter();
@@ -80,6 +80,7 @@ input[type="radio"] {
 @media (width <=768px) {
     .container {
         width: 100%;
+        padding: 1rem 0px;
     }
 
     .main {
