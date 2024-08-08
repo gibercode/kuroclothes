@@ -64,7 +64,7 @@ const Card = ({
 
   const handleOut = () => {
     if (!currentImage) return null;
-    if (isMobile && currentType === "t-shirt") return null;
+    if (isMobile && currentType === "t-shirt") return `${styles.InNoFade}`;
     if (currentImage === "back" && back && !isMobile) return styles.inImage;
     if (currentImage === "front" && back && !isMobile) return styles.outImage;
   };

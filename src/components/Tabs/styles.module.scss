@@ -34,13 +34,13 @@ input[type="radio"] {
     @include flexcenter();
 
     &::after {
-        background: silver;
+        background: $gray;
         content: "";
         width: 100%;
-        height: 1px;
+        height: 1.5px;
         position: absolute;
         top: 2.9375rem;
-        filter: blur(0.5px);
+        filter: blur(0.4px);
     }
 
     & label {

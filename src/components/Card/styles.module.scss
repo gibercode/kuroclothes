@@ -60,11 +60,13 @@ $size: 1.875rem;
     position: absolute;
     top: 0px;
     left: 0px;
-
-
 }
 
 .outNoFade {
+    opacity: 0;
+}
+
+.inNoFade {
     opacity: 0;
 }
 

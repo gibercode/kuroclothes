@@ -1,5 +1,12 @@
 @import 'public/styles/index.scss';
 
+
+@mixin centerFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .main {
     background-color: $black;
     display: flex;
@@ -18,6 +25,23 @@
 
 .img {
     background: $gray;
+}
+
+
+.noResult {
+    @include centerFlex();
+}
+
+.messageContainer {
+    width: 85%;
+    @include centerFlex();
+
+    & p {
+        width: 70%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        color: $white;
+    }
 }
 
 @media (width <=992px) {
