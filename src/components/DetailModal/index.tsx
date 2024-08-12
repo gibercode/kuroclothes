@@ -226,8 +226,8 @@ export const DetailModal = ({ product, onClose }: any) => {
                 </p>
                 <svg
                   fill="#ebe9e9"
-                  width="20px"
-                  height="18px"
+                  width="1.25rem"
+                  height="1.125rem"
                   viewBox="0 0 32 32"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"

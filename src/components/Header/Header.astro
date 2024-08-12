@@ -8,7 +8,6 @@ import Sidebar from "../Sidebar/Sidebar.astro";
   const elemento: HTMLElement | any = document.querySelector("#toggle");
   elemento.addEventListener("click", function () {
     const element: HTMLElement | any = document.querySelector("#sidebar");
-    const classes = [...element.classList];
     element.classList.toggle("translated");
   });
 </script>
@@ -16,7 +15,7 @@ import Sidebar from "../Sidebar/Sidebar.astro";
 <Progress />
 <nav class={styles.navbar}>
   <img
-    src="/logo.png"
+    src="/thelogo.png"
     alt="logo"
     class={styles.logo}
     loading="lazy"

@@ -35,7 +35,7 @@
     margin-top: 1rem;
   }
   .options > li {
-    padding: 10px;
+    padding: 0.625rem;
     border-left: 1px solid #070707;
     transition: all 0.3s;
     cursor: pointer;
@@ -62,7 +62,7 @@
       right: 0px;
       width: 15.625rem;
       transform: translateX(15.625rem);
-      padding: 24px;
+      padding: 1.5rem;
       height: 100dvh;
     }
 
@@ -79,38 +79,28 @@
 
 <script>
   const element: HTMLElement | any = document.querySelector("#sidebar");
-  const closeBtn: any = document.querySelector("#close-btn");
-
-  closeBtn.addEventListener("click", () => {
+  element.addEventListener("click", () => {
     element.classList.remove("translated");
   });
 
-  const elements: HTMLElement[] | any = document.getElementsByName("sidebar");
-
-  elements.forEach((item: any) => {
+  const elements: HTMLElement[] | any = document.getElementsByClassName("item");
+  Array.from(elements).forEach((item: any) => {
     item.addEventListener("click", (event: any) => {
       const target = event?.target?.id.replace("-", "");
       const section: HTMLElement | any = document.querySelector(`#${target}`);
       section.scrollIntoView({ behavior: "smooth" });
-      element.classList.remove("translated");
     });
   });
 </script>
 
 <div class="sidebar" id="sidebar">
   <div class="close-container">
-    <img
-      loading="lazy"
-      src="/close.png"
-      alt="mockup"
-      width="18px"
-      id="close-btn"
-    />
+    <img loading="lazy" src="/close.png" alt="mockup" width="18px" />
   </div>
   <ul class="options">
-    <li id="products-" name="sidebar">Productos</li>
-    <li id="footer-" name="sidebar">Métodos de pago</li>
-    <li id="footer-" name="sidebar">Contacto</li>
-    <li id="footer-" name="sidebar">Envíos</li>
+    <li id="products-" class="item">Productos</li>
+    <li id="footer-" class="item">Métodos de pago</li>
+    <li id="footer-" class="item">Contacto</li>
+    <li id="footer-" class="item">Envíos</li>
   </ul>
 </div>

@@ -1,5 +1,12 @@
 @import 'public/styles/index.scss';
 
+
+@mixin centerFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .main {
     background-color: $black;
     display: flex;
@@ -20,6 +27,24 @@
     background: $gray;
 }
 
+
+.noResult {
+    @include centerFlex();
+}
+
+.messageContainer {
+    width: 85%;
+    @include centerFlex();
+
+    & p {
+        width: 70%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        color: gray;
+        font-size: 14px;
+    }
+}
+
 @media (width <=992px) {
     .grid {
         width: 90%;
@@ -36,6 +61,10 @@
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         width: 90%;
         gap: 2rem;
+    }
+
+    .messageContainer {
+        width: 100%;
     }
 }
 
