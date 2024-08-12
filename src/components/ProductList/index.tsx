@@ -6,13 +6,7 @@ import { UseCategory } from "../../hooks/useCategory.js";
 import SearchInput from "../SearchInput";
 import type { JSX } from "preact";
 
-export const ProductList = ({
-  initialData = [],
-  isLoading,
-}: {
-  initialData: any;
-  isLoading: boolean | any;
-}) => {
+export const ProductList = ({ initialData = [] }: { initialData: any }) => {
   const { currentType } = UseCategory();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
@@ -45,7 +39,6 @@ export const ProductList = ({
   }, [search]);
 
   useMemo(() => {
-    // if (!products?.length) filterProducts(initialData);
     filterProducts(initialData);
   }, [debouncedSearch, currentType]);
 

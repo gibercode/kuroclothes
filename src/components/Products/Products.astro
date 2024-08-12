@@ -3,10 +3,8 @@ import { contentfulClient } from "../../utils";
 import { ProductList } from "../../components/ProductList";
 
 let data: any = [];
-let isLoading = false;
 
 try {
-  isLoading = true;
   const { items } = await contentfulClient.getEntries<any>({
     content_type: "kuroClothes",
     order: ["fields.position"],
@@ -14,9 +12,7 @@ try {
   data = items;
 } catch (err) {
   return Astro.redirect("/404");
-} finally {
-  isLoading = false;
 }
 ---
 
-<ProductList initialData={data} isLoading={isLoading} client:load />
+<ProductList initialData={data} client:load />
