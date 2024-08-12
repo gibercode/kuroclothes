@@ -18,8 +18,8 @@
         background-size: 100%;
         background-size: cover;
         position: absolute;
-        width: 25px;
-        height: 25px;
+        width: 1.5625rem;
+        height: 1.5625rem;
         right: 0px;
         transform: translate(-50%, -50%);
         top: 50%;
@@ -29,17 +29,37 @@
 .input {
     background-color: $black;
     border: none;
-    padding: 16px 20px;
+    padding: 1rem 2.8125rem 1rem 1.25rem;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     outline: none;
-    font-size: 16px;
+    font-size: 1rem;
     color: $white;
     border-bottom: solid 1.5px $gray;
+    border-radius: 0px;
 }
 
 .icon {
     position: absolute;
-    width: 30px;
+    width: 1.875rem;
     right: 0px;
+}
+
+@media (width <=768px) {
+
+    .input {
+        padding: 0px 2.5rem 0.625rem 0.25rem;
+    }
+
+    .inputContainer {
+        &:after {
+            content: "";
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    .main {
+        margin-top: 1rem;
+    }
 }
