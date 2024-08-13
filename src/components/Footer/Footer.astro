@@ -3,8 +3,8 @@ import styles from "./style.module.scss";
 ---
 
 <script>
-  const elements: HTMLElement[] | any = document.getElementsByName("option");
-  elements.forEach((element: any) => {
+  const elements: HTMLElement[] | any = document.getElementsByTagName("p");
+  Array.from(elements).forEach((element: any) => {
     element.addEventListener("click", (event: any) => {
       const elementToOpen = `${event.target.id}-accordion`;
       const element: HTMLElement | any = document.querySelector(
@@ -20,7 +20,7 @@ import styles from "./style.module.scss";
 
 <footer class={styles.main} id="footer">
   <div>
-    <p class:list={styles.text} id="payment" name="option">Métodos de pago +</p>
+    <p class:list={styles.text} id="payment">Métodos de pago +</p>
     <div class={styles.accordion} id="payment-accordion">
       <ul>
         <li>- Binance</li>
@@ -31,7 +31,7 @@ import styles from "./style.module.scss";
         <li>- Efectivo</li>
       </ul>
     </div>
-    <p class={styles.text} name="option" id="send">Envíos +</p>
+    <p class={styles.text} id="send">Envíos +</p>
     <div class={styles.accordion} id="send-accordion">
       <ul>
         <li>
@@ -41,7 +41,7 @@ import styles from "./style.module.scss";
         <li>Pick up: El Cafetal / La Castellana (Previo acuerdo)</li>
       </ul>
     </div>
-    <p class={styles.text} name="option" id="terms">Términos y condiciones +</p>
+    <p class={styles.text} id="terms">Términos y condiciones +</p>
     <div class={styles.accordion} id="terms-accordion">
       <ul>
         <li>- Los productos están sujetos a disponibilidad.</li>
