@@ -147,10 +147,10 @@ $size: 1.875rem;
     .card {
         padding: 16px;
 
-        // &:hover {
-        //     transition: all .6s;
-        //     transform: scale(1);
-        // }
+        &:hover {
+            transition: none;
+            transform: none;
+        }
     }
 }
 
