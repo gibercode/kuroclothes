@@ -151,6 +151,10 @@ $size: 1.875rem;
             transition: none;
             transform: none;
         }
+
+        &:hover .openDetail {
+            animation: none;
+        }
     }
 }
 
