@@ -5,7 +5,7 @@ $size: 1.875rem;
 .card {
     background-color: $gray;
     border-radius: 4px;
-    padding: 24px;
+    padding: 1.5rem;
     cursor: pointer;
     height: fit-content;
     box-sizing: border-box;
@@ -24,7 +24,7 @@ $size: 1.875rem;
     color: $white;
     font-family: 'Oswald', sans-serif;
     max-width: 100%;
-    padding-right: 8px;
+    padding-right: 0.5rem;
     box-sizing: border-box;
 }
 
@@ -88,8 +88,8 @@ $size: 1.875rem;
 }
 
 .smallFont {
-    font-size: 12px;
-    margin-right: 8px;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
 }
 
 .openDetail {
@@ -139,13 +139,13 @@ $size: 1.875rem;
     }
 
     .grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
         width: 75%;
         gap: 2rem;
     }
 
     .card {
-        padding: 16px;
+        padding: 1rem;
     }
 }
 
@@ -156,7 +156,7 @@ $size: 1.875rem;
     height: 1.875rem;
 
     @media (width <=768px) {
-        margin-bottom: 8px;
+        margin-bottom: 0.5rem;
         height: auto;
     }
 }
