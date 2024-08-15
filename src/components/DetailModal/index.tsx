@@ -145,9 +145,6 @@ export const DetailModal = ({ product, onClose }: any) => {
             <div>
               <div className={styles.titleContainer}>
                 <h2 className={styles.title}>{product?.name}</h2>
-                {/* {product?.type && (
-                  <p className={styles.text}>({product?.type})</p>
-                )} */}
               </div>
               <p className={styles.margintext}>
                 {dictionary[currentType]} 100% de algodón, cuello redondo. Su
