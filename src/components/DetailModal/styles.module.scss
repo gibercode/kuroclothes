@@ -48,7 +48,6 @@
     }
 }
 
-
 .images {
     margin-top: 0.6rem;
     display: flex;
@@ -62,7 +61,6 @@
     max-width: 100%;
     padding-right: 0.5rem;
     box-sizing: border-box;
-    margin-bottom: 0.6rem;
 }
 
 .text {
@@ -156,8 +154,6 @@
     justify-content: flex-end;
 }
 
-
-
 .buyBtn {
     background-color: $red;
     border: solid 1px $red;
@@ -199,6 +195,7 @@
 }
 
 .titleContainer {
+    margin-bottom: 0.6rem;
     display: flex;
     align-items: center;
 
@@ -319,12 +316,12 @@
     }
 
     .title {
-        font-size: 1.375rem;
+        font-size: 1.2rem;
     }
 
     .titleContainer {
         & p {
-            font-size: 0.875rem;
+            font-size: 0.9rem;
         }
     }
 
