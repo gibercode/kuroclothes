@@ -5,6 +5,7 @@ import { Toast } from "../Toast";
 import { devices } from "../../utils";
 import { UseCategory } from "../../hooks";
 import { dictionary } from "../../utils";
+import { RETURN_URL } from "../../utils";
 
 export const DetailModal = ({ product, onClose }: any) => {
   const { currentType } = UseCategory();
@@ -69,7 +70,7 @@ export const DetailModal = ({ product, onClose }: any) => {
       description: `${product?.name} ${
         product?.type
       } | Cantidad: ${counter} - Talla: ${currentSize.trim()}`,
-      returnUrl: "https://kuro-clothes.com/confirm",
+      returnUrl: RETURN_URL,
       goodsDetails: [
         {
           goodsType: "01",

@@ -14,3 +14,5 @@ export const dictionary: Record<string, string> = {
   "t-shirt": "Franela",
   top: "Top",
 };
+
+export const RETURN_URL = "https://kuro-clothes.com/confirm";
