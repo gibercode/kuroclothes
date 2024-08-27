@@ -17,6 +17,7 @@
     "astro": "^3.5.3",
     "contentful": "^10.9.2",
     "crypto-js": "^4.2.0",
+    "firebase-tools": "^13.15.4",
     "framer-motion": "^10.16.5",
     "install": "^0.13.0",
     "nanostores": "^0.10.3",

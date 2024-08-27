@@ -16,7 +16,7 @@ export const DetailModal = ({ product, onClose }: any) => {
     : product?.size;
   const [counter, setCounter] = useState(1);
   const [currentSize, setSize] = useState(
-    product?.size.includes("/") ? "S" : product?.size
+    product?.size.includes("/") ? sizes?.[0]?.trim() : product?.size
   );
   const [mainImage, setMainImage] = useState(product?.front);
   const [loading, setLoading] = useState(false);
