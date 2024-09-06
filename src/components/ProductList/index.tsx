@@ -38,7 +38,7 @@ export const ProductList = ({ initialData = [] }: { initialData: any }) => {
     };
   }, [search]);
 
-  useMemo(() => {
+  useEffect(() => {
     filterProducts(initialData);
   }, [debouncedSearch, currentType]);
 

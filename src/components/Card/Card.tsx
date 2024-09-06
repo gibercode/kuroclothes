@@ -18,7 +18,7 @@ const Card = ({
 
   const handleMobile = (state: boolean) => setIsMobile(state);
 
-  useMemo(() => {
+  useEffect(() => {
     if (isMobile && currentType === "t-shirt") return setCurrentImage("back");
     if (currentImage !== "t-shirt") setCurrentImage(null);
   }, [currentType, isMobile]);
