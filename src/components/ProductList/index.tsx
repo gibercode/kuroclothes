@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import Card from "../Card/Card.jsx";
 import styles from "./style.module.scss";
 import { normalizeProduct } from "../../utils";

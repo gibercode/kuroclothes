@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { DetailModal } from "../DetailModal";
 import { UseCategory } from "../../hooks";
