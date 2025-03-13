@@ -5,7 +5,7 @@ import { Toast } from "../Toast";
 import { devices } from "../../utils";
 import { UseCategory } from "../../hooks";
 import { dictionary } from "../../utils";
-import { RETURN_URL } from "../../utils";
+import { RETURN_URL, translateProductType } from "../../utils";
 
 export const DetailModal = ({ product, onClose }: any) => {
   const { currentType } = UseCategory();
@@ -57,7 +57,7 @@ export const DetailModal = ({ product, onClose }: any) => {
     };
   }, []);
 
-  const buyProduct = async (): Promise<any> => {
+  const buyProduct = async (): Promise<unknown> => {
     const uuid: any = uuidv4();
     const id = uuid.replaceAll("-", "");
     const payload: any = {
@@ -107,6 +107,21 @@ export const DetailModal = ({ product, onClose }: any) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const buildMessage = () => {
+    const title = "¡Hola!, me gustaría comprar:";
+    const body = `${counter} ${translateProductType[product.type]} de ${
+      product?.name
+    } en talla ${currentSize.trim()}`;
+    const text = encodeURIComponent(`${title}\n\n${body}`);
+    return text;
+  };
+
+  const redirectToWhatsapp = () => {
+    const text = buildMessage();
+    const url = `https://wa.me/584242877044?text=${text}`;
+    window.open(url, "_blank");
   };
 
   const handleSeeMore = (): void => setOpened((prev: boolean) => !prev);
@@ -199,7 +214,7 @@ export const DetailModal = ({ product, onClose }: any) => {
                 <div className={styles.priceContainer}>
                   <h2 className={styles.price}>{price}$</h2>
                 </div>
-                <button className={styles.buyBtn} onClick={buyProduct}>
+                <button className={styles.buyBtn} onClick={redirectToWhatsapp}>
                   Comprar
                   {!loading ? (
                     <img
@@ -216,23 +231,6 @@ export const DetailModal = ({ product, onClose }: any) => {
                   text="Ha ocurrido un error al intentar procesar el pago"
                   status={status}
                 />
-              </div>
-
-              <div className={styles.paymentContainer}>
-                <p className={styles.paymentText}>
-                  Su pago será procesado con binance
-                </p>
-                <svg
-                  fill="#ebe9e9"
-                  width="1.25rem"
-                  height="1.125rem"
-                  viewBox="0 0 32 32"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>binance</title>
-                  <path d="M15.986 1.019l9.189 9.159-3.396 3.393-5.793-5.793-5.793 5.823-3.396-3.393 9.189-9.189zM4.399 12.605l3.365 3.395-3.363 3.365-3.396-3.365zM15.986 12.607l3.394 3.363-3.395 3.395-3.395-3.365 3.395-3.393zM27.572 12.605l3.423 3.395-3.393 3.395-3.395-3.395zM21.778 18.399l3.396 3.393-9.189 9.189-9.189-9.187 3.396-3.395 5.793 5.823 5.793-5.823z"></path>
-                </svg>
               </div>
             </div>
           </div>
