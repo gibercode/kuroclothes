@@ -110,7 +110,7 @@ export const DetailModal = ({ product, onClose }: any) => {
   };
 
   const buildMessage = () => {
-    const title = "¡Hola!, me gustaría comprar:";
+    const title = "¡Hola! me gustaría comprar:";
     const body = `${counter} ${translateProductType[product.type]} de ${
       product?.name
     } en talla ${currentSize.trim()}`;
