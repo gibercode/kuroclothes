@@ -63,7 +63,7 @@ input[type="radio"] {
     height: 4.5px;
     background-color: $red;
     border-radius: 0.625rem;
-    width: 50%;
+    width: 33.3%;
     z-index: 1;
     left: 0;
     bottom: 0;
@@ -74,16 +74,10 @@ input[type="radio"] {
 //Make this dynamic
 .radioTop:checked~nav>.slider {
     background-color: $red;
-    left: 50%;
 }
 
 @media (width <=768px) {
-    .container {
-        width: 100%;
-        padding: 1rem 0px;
-    }
-
     .main {
-        padding-top: 3rem;
+        display: none;
     }
 }

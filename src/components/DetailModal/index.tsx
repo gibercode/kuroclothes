@@ -57,6 +57,40 @@ export const DetailModal = ({ product, onClose }: any) => {
     };
   }, []);
 
+  const messageComponent = () => {
+    return currentType === "tote-bag" ? (
+      <p className={styles.margintext}>
+        Tote bag de tela drill es la combinación perfecta de resistencia y
+        diseño. Con un estampado en DTF de alta calidad, ofrece durabilidad y un
+        acabado nítido que se adapta a cualquier estilo.
+      </p>
+    ) : (
+      <>
+        <p className={styles.margintext}>
+          {dictionary[currentType]} 100% de algodón, cuello redondo. Su tejido
+          suave y transpirable te mantendrá fresco y cómodo durante todo el día.
+        </p>
+
+        <div
+          className={`${styles.allDescription} ${opened ? styles.opened : ""}`}
+        >
+          <p className={styles.margintext}>
+            El estampado DTF de alta calidad aporta un toque único y
+            personalizado a la prenda, haciéndola destacar entre la multitud.
+            Ideal para cualquier ocasión.
+          </p>
+          <p className={styles.margintext}>
+            En caso de no disponer en stock la talla deseada, escríbenos
+            directamente a nuestro WhatsApp y te ayudaremos!
+          </p>
+        </div>
+        <p className={styles.seeMore} onClick={handleSeeMore}>
+          Ver {!opened ? "más +" : "menos -"}
+        </p>
+      </>
+    );
+  };
+
   const buyProduct = async (): Promise<unknown> => {
     const uuid: any = uuidv4();
     const id = uuid.replaceAll("-", "");
@@ -162,31 +196,7 @@ export const DetailModal = ({ product, onClose }: any) => {
               <div className={styles.titleContainer}>
                 <h2 className={styles.title}>{product?.name}</h2>
               </div>
-              <p className={styles.margintext}>
-                {dictionary[currentType]} 100% de algodón, cuello redondo. Su
-                tejido suave y transpirable te mantendrá fresco y cómodo durante
-                todo el día.
-              </p>
-
-              <div
-                className={`${styles.allDescription} ${
-                  opened ? styles.opened : ""
-                }`}
-              >
-                <p className={styles.margintext}>
-                  El estampado DTF de alta calidad aporta un toque único y
-                  personalizado a la prenda, haciéndola destacar entre la
-                  multitud. Ideal para cualquier ocasión.
-                </p>
-                <p className={styles.margintext}>
-                  En caso de no disponer en stock la talla deseada, escríbenos
-                  directamente a nuestro WhatsApp y te ayudaremos!
-                </p>
-              </div>
-              <p className={styles.seeMore} onClick={handleSeeMore}>
-                Ver {!opened ? "más +" : "menos -"}
-              </p>
-
+              {messageComponent()}
               <div className={styles.sizeContainer}>
                 {Array.isArray(sizes) ? (
                   sizes.map((size: string) => (

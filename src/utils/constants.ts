@@ -18,6 +18,7 @@ export const dictionary: Record<string, string> = {
 export const translateProductType: Record<string, string> = {
   "Classic t-shirt": "Franela/s",
   "Crop-top": "Top/s",
+  "Tote bag": "Tote bag/s"
 };
 
 export const RETURN_URL = "https://kuro-clothes.com/confirm";
