@@ -5,8 +5,12 @@ import styles from "./style.module.scss";
 <script>
   const arrow: HTMLElement | any = document.querySelector("#arrow");
   arrow.addEventListener("click", () => {
-    const section: HTMLElement | any = document.querySelector("#products");
-    section.scrollIntoView({ behavior: "smooth" });
+    const section: HTMLElement | any = document.querySelectorAll(
+      ".products-container"
+    );
+    section.forEach((item: any) => {
+      item.scrollIntoView({ behavior: "smooth" });
+    });
   });
 </script>
 

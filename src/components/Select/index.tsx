@@ -11,7 +11,7 @@ export const Select = () => {
     setCurrent(value);
   };
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} products-container`}>
       <select
         name="types"
         className={styles.select}

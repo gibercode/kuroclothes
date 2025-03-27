@@ -13,7 +13,7 @@ export const Tabs = () => {
   };
 
   return (
-    <div className={styles.main} id="products">
+    <div className={`${styles.main} products-container`}>
       <div className={styles.container}>
         <input type="radio" name="slider" checked={current === 0} />
         <input
