@@ -12,20 +12,40 @@ import styles from "./style.module.scss";
       item.scrollIntoView({ behavior: "smooth" });
     });
   });
+
+  const button: HTMLElement | any = document.querySelector("#product-btn");
+  button.addEventListener("click", () => {
+    const section: HTMLElement | any = document.querySelectorAll(
+      ".products-container"
+    );
+    section.forEach((item: any) => {
+      item.scrollIntoView({ behavior: "smooth" });
+    });
+  });
 </script>
 
 <div class={styles.main}>
-  <h1 class={styles.title}>KURO</h1>
-  <h1 class={styles.titlevariant}>CLOTHES</h1>
-  <h2 class={styles.subtitle}>クロの服</h2>
-  <div class={styles.icon_container} id="arrow">
-    <img
-      class={styles.arrow_icon}
-      src="/down-arrow.png"
-      width={40}
-      alt="arrow-icon"
-      loading="lazy"
-      decoding="async"
-    />
+  <div class={styles.mainContainer}>
+    <div style={styles.container}>
+      <div class={styles.titleContainer}>
+        <h1 class={styles.title}>KURO</h1>
+        <h1 class={styles.titlevariant}>CLOTHES</h1>
+      </div>
+      <h3 class={styles.subtitle}>クロの服</h3>
+  
+      <button class={styles.button} id="product-btn">Ver productos</button>
+    </div>
+    
+    <div class={styles.icon_container} id="arrow">
+      <img
+        class={styles.arrow_icon}
+        src="/down-arrow.png"
+        width={20}
+        alt="arrow-icon"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
   </div>
+
 </div>
