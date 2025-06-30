@@ -7,4 +7,5 @@ export const normalizeProduct = (item: any) => ({
   type: item?.fields?.tshirtType,
   productType: item?.fields?.type,
   tags: item?.fields?.tags ?? [],
+  onlyFront: !item?.fields?.back_image?.fields?.file?.url ? true : false
 });

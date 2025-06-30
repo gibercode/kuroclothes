@@ -1,3 +1,4 @@
+import { memo } from "preact/compat";
 import { useState, useEffect } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { DetailModal } from "../DetailModal";
@@ -10,6 +11,8 @@ const Card = ({
   front,
   back,
   size,
+  rate,
+  onlyFront
 }: Record<string, any>) => {
   const { currentType } = UseCategory();
   const [currentImage, setCurrentImage] = useState<string | null>(null);
@@ -20,8 +23,8 @@ const Card = ({
 
   useEffect(() => {
     if (isMobile && currentType === "t-shirt") return setCurrentImage("back");
-    if (currentImage !== "t-shirt") setCurrentImage(null);
-  }, [currentType, isMobile]);
+    if (currentImage !== "t-shirt" && !onlyFront) setCurrentImage(null);
+  }, [currentType, isMobile, onlyFront]);
 
   useEffect(() => {
     const desktopMediaQuery = window.matchMedia("(max-width: 768px)");
@@ -37,8 +40,10 @@ const Card = ({
     });
 
     if (window.innerWidth < 768) {
-      setIsMobile(true);
+      handleMobile(true);
+      if (onlyFront) return setCurrentImage("front");
       setCurrentImage(back ? "back" : "front");
+
     }
 
     return () => {
@@ -51,12 +56,11 @@ const Card = ({
     setProduct(localProduct);
   };
 
-  const handleClose = () => {
-    setProduct(null);
-  };
+  const handleClose = () => setProduct(null);
 
   const handleStyles = () => {
     if (!currentImage) return null;
+    if (isMobile && currentType === "t-shirt" && onlyFront) return `${styles.InNoFade}`;
     if (isMobile && currentType === "t-shirt") return `${styles.outNoFade}`;
     if (currentImage === "back" && back && !isMobile) return styles.outImage;
     if (currentImage === "front" && back && !isMobile) return styles.inImage;
@@ -64,6 +68,7 @@ const Card = ({
 
   const handleOut = () => {
     if (!currentImage) return null;
+    if (isMobile && currentType === "t-shirt" && onlyFront) return `${styles.InNoFade}`;
     if (isMobile && currentType === "t-shirt") return `${styles.InNoFade}`;
     if (currentImage === "back" && back && !isMobile) return styles.inImage;
     if (currentImage === "front" && back && !isMobile) return styles.outImage;
@@ -136,9 +141,9 @@ const Card = ({
           </div>
         </div>
       </div>
-      {product && <DetailModal product={product} onClose={handleClose} />}
+      {product && <DetailModal product={product} onClose={handleClose} rate={rate} />}
     </>
   );
 };
 
-export default Card;
+export default memo(Card);

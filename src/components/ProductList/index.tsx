@@ -2,9 +2,10 @@ import { useState, useEffect } from "preact/hooks";
 import Card from "../Card/Card.jsx";
 import styles from "./style.module.scss";
 import { normalizeProduct } from "../../utils";
-import { UseCategory } from "../../hooks/useCategory.js";
+import { UseCategory } from "../../hooks/useCategory";
 import SearchInput from "../SearchInput";
 import type { JSX } from "preact";
+import { UseGetRate } from "../../hooks/useRate";
 
 export const ProductList = ({ initialData = [] }: { initialData: any }) => {
   const { currentType } = UseCategory();
@@ -49,6 +50,8 @@ export const ProductList = ({ initialData = [] }: { initialData: any }) => {
     setSearch(input?.value);
   };
 
+  const { rate } = UseGetRate();
+
   return (
     <>
       <SearchInput handleChange={handleChange} />
@@ -57,7 +60,7 @@ export const ProductList = ({ initialData = [] }: { initialData: any }) => {
           <div className={styles.grid}>
             {products.map((item, index) => {
               const product = normalizeProduct(item);
-              return <Card {...{ ...product, ...{ key: index } }} />;
+              return <Card {...{ ...product, ...{ key: index }, rate }} />;
             })}
           </div>
         ) : (

@@ -7,10 +7,11 @@ import { UseCategory } from "../../hooks";
 import { dictionary } from "../../utils";
 import { RETURN_URL, translateProductType } from "../../utils";
 
-export const DetailModal = ({ product, onClose }: any) => {
+export const DetailModal = ({ product, onClose, rate }: any) => {
   const { currentType } = UseCategory();
   const basePrice = parseInt(product?.price?.replace("$", ""));
   const [price, setPrice] = useState(basePrice);
+  const [bsPrice, setBsPrice] = useState(0);
   const sizes = product?.size.includes("/")
     ? product?.size.split(" /")
     : product?.size;
@@ -31,15 +32,21 @@ export const DetailModal = ({ product, onClose }: any) => {
       setCounter((prev: any) => {
         const result = prev + 1;
         setPrice(result * basePrice);
+        setBsPrice(result * basePrice * rate);
         return prev + 1;
       });
   };
+
+  useEffect(() => {
+    setBsPrice(1 * basePrice * rate);
+  }, [])
 
   const handleMinus = () => {
     if (counter >= 2)
       setCounter((prev) => {
         const result = prev - 1;
         setPrice(result * basePrice);
+        setBsPrice(result * basePrice * rate);
         return prev - 1;
       });
   };
@@ -222,7 +229,8 @@ export const DetailModal = ({ product, onClose }: any) => {
             <div>
               <div className={styles.btnContainer}>
                 <div className={styles.priceContainer}>
-                  <h2 className={styles.price}>{price}$</h2>
+                  <h2 className={styles.price}>${price} /</h2>
+                  <p className={styles.bsPrice}>{ rate && `Bs: ${bsPrice.toFixed(2)}`}</p>
                 </div>
                 <button className={styles.buyBtn} onClick={redirectToWhatsapp}>
                   Comprar
