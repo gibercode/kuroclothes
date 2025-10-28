@@ -1,14 +1,16 @@
 import styles from "./styles.module.scss";
 import { $productCategory } from "../../store/productCategory";
 import { useState } from "preact/hooks";
+import type { JSX } from "preact";
+import type { ProductCategory } from "../../types";
 
 export const Select = () => {
-  const [current, setCurrent] = useState("t-shirt");
+  const [current, setCurrent] = useState<ProductCategory>("t-shirt");
 
-  const handleChange = (event: any) => {
-    const { value } = event.target;
-    $productCategory.set(value);
-    setCurrent(value);
+  const handleChange = (event: JSX.TargetedEvent<HTMLSelectElement, Event>): void => {
+    const { value } = event.currentTarget;
+    $productCategory.set(value as ProductCategory);
+    setCurrent(value as ProductCategory);
   };
   return (
     <div className={`${styles.main} products-container`}>

@@ -3,22 +3,22 @@ import styles from "./style.module.scss";
 ---
 
 <script>
-  const arrow: HTMLElement | any = document.querySelector("#arrow");
-  arrow.addEventListener("click", () => {
-    const section: HTMLElement | any = document.querySelectorAll(
+  const arrow = document.querySelector<HTMLElement>("#arrow");
+  arrow?.addEventListener("click", () => {
+    const sections = document.querySelectorAll<HTMLElement>(
       ".products-container"
     );
-    section.forEach((item: any) => {
+    sections.forEach((item: HTMLElement) => {
       item.scrollIntoView({ behavior: "smooth" });
     });
   });
 
-  const button: HTMLElement | any = document.querySelector("#product-btn");
-  button.addEventListener("click", () => {
-    const section: HTMLElement | any = document.querySelectorAll(
+  const button = document.querySelector<HTMLElement>("#product-btn");
+  button?.addEventListener("click", () => {
+    const sections = document.querySelectorAll<HTMLElement>(
       ".products-container"
     );
-    section.forEach((item: any) => {
+    sections.forEach((item: HTMLElement) => {
       item.scrollIntoView({ behavior: "smooth" });
     });
   });
@@ -32,10 +32,10 @@ import styles from "./style.module.scss";
         <h1 class={styles.titlevariant}>CLOTHES</h1>
       </div>
       <h3 class={styles.subtitle}>クロの服</h3>
-  
+
       <button class={styles.button} id="product-btn">Ver productos</button>
     </div>
-    
+
     <div class={styles.icon_container} id="arrow">
       <img
         class={styles.arrow_icon}
@@ -47,5 +47,4 @@ import styles from "./style.module.scss";
       />
     </div>
   </div>
-
 </div>

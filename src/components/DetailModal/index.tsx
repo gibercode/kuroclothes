@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "preact/hooks";
+import type { JSX } from "preact";
 import styles from "./styles.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import { Toast } from "../Toast";
@@ -6,65 +7,68 @@ import { devices } from "../../utils";
 import { UseCategory } from "../../hooks";
 import { dictionary } from "../../utils";
 import { RETURN_URL, translateProductType } from "../../utils";
+import type { DetailModalProps } from "../../types";
 
-export const DetailModal = ({ product, onClose, rate }: any) => {
+export const DetailModal = ({ product, onClose, rate }: DetailModalProps) => {
   const { currentType } = UseCategory();
-  const basePrice = parseInt(product?.price?.replace("$", ""));
-  const [price, setPrice] = useState(basePrice);
-  const [bsPrice, setBsPrice] = useState(0);
+  const basePrice = parseInt(product?.price?.replace("$", "") ?? "0");
+  const [price, setPrice] = useState<number>(basePrice);
+  const [bsPrice, setBsPrice] = useState<number>(0);
   const sizes = product?.size.includes("/")
     ? product?.size.split(" /")
     : product?.size;
-  const [counter, setCounter] = useState(1);
-  const [currentSize, setSize] = useState(
+  const [counter, setCounter] = useState<number>(1);
+  const [currentSize, setSize] = useState<string>(
     product?.size.includes("/") ? sizes?.[0]?.trim() : product?.size
   );
-  const [mainImage, setMainImage] = useState(product?.front);
-  const [loading, setLoading] = useState(false);
-  const [opened, setOpened] = useState(false);
-  const handleMainImage = (image: string) => setMainImage(image);
-  const handleSize = (size: string) => setSize(size);
-  const [status, setStatus] = useState(0);
-  const timeout = useRef<any>(null);
+  const [mainImage, setMainImage] = useState<string>(product?.front);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [opened, setOpened] = useState<boolean>(false);
+  const handleMainImage = (image: string): void => setMainImage(image);
+  const handleSize = (size: string): void => setSize(size);
+  const [status, setStatus] = useState<number>(0);
+  const timeout = useRef<number | null>(null);
 
-  const handleAdd = () => {
+  const handleAdd = (): void => {
     if (counter >= 1)
-      setCounter((prev: any) => {
+      setCounter((prev: number) => {
         const result = prev + 1;
         setPrice(result * basePrice);
-        setBsPrice(result * basePrice * rate);
+        setBsPrice(result * basePrice * (rate ?? 0));
         return prev + 1;
       });
   };
 
   useEffect(() => {
-    setBsPrice(1 * basePrice * rate);
-  }, [])
+    setBsPrice(1 * basePrice * (rate ?? 0));
+  }, [basePrice, rate])
 
-  const handleMinus = () => {
+  const handleMinus = (): void => {
     if (counter >= 2)
-      setCounter((prev) => {
+      setCounter((prev: number) => {
         const result = prev - 1;
         setPrice(result * basePrice);
-        setBsPrice(result * basePrice * rate);
+        setBsPrice(result * basePrice * (rate ?? 0));
         return prev - 1;
       });
   };
 
-  const handleToast = () => {
+  const handleToast = (): void => {
     setStatus(1);
-    timeout.current = setTimeout(() => {
+    timeout.current = window.setTimeout(() => {
       setStatus(2);
     }, 3000);
   };
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeout.current);
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
     };
   }, []);
 
-  const messageComponent = () => {
+  const messageComponent = (): JSX.Element => {
     return currentType === "tote-bag" ? (
       <p className={styles.margintext}>
         Tote bag de tela drill es la combinación perfecta de resistencia y
@@ -98,10 +102,35 @@ export const DetailModal = ({ product, onClose, rate }: any) => {
     );
   };
 
-  const buyProduct = async (): Promise<unknown> => {
-    const uuid: any = uuidv4();
+  interface PaymentPayload {
+    env: {
+      terminalType: string;
+    };
+    merchantTradeNo: string;
+    orderAmount: number;
+    currency: string;
+    description: string;
+    returnUrl: string;
+    goodsDetails: Array<{
+      goodsType: string;
+      goodsCategory: string;
+      referenceGoodsId: string;
+      goodsName: string;
+      goodsDetail: string;
+    }>;
+  }
+
+  interface PaymentResponse {
+    data: {
+      deeplink: string;
+      universalUrl: string;
+    };
+  }
+
+  const buyProduct = async (): Promise<void> => {
+    const uuid: string = uuidv4();
     const id = uuid.replaceAll("-", "");
-    const payload: any = {
+    const payload: PaymentPayload = {
       env: {
         terminalType: "APP",
       },
@@ -127,7 +156,7 @@ export const DetailModal = ({ product, onClose, rate }: any) => {
 
     try {
       setLoading(true);
-      const response: any = await fetch(
+      const response = await fetch(
         import.meta.env.PUBLIC_BACKEND_URL || "",
         {
           method: "POST",
@@ -137,10 +166,11 @@ export const DetailModal = ({ product, onClose, rate }: any) => {
           },
         }
       );
-      const result = await response.json();
+      const result: PaymentResponse = await response.json();
 
       if (new RegExp(devices.join("|")).test(navigator.userAgent)) {
-        return window.open(result?.data?.deeplink, "_self");
+        window.open(result?.data?.deeplink, "_self");
+        return;
       }
       window.open(result?.data?.universalUrl, "_self");
     } catch (err) {
@@ -150,7 +180,7 @@ export const DetailModal = ({ product, onClose, rate }: any) => {
     }
   };
 
-  const buildMessage = () => {
+  const buildMessage = (): string => {
     const title = "¡Hola! me gustaría comprar:";
     const body = `${counter} ${translateProductType[product.type]} de ${
       product?.name
@@ -159,7 +189,7 @@ export const DetailModal = ({ product, onClose, rate }: any) => {
     return text;
   };
 
-  const redirectToWhatsapp = () => {
+  const redirectToWhatsapp = (): void => {
     const text = buildMessage();
     const url = `https://wa.me/584242877044?text=${text}`;
     window.open(url, "_blank");
@@ -190,7 +220,11 @@ export const DetailModal = ({ product, onClose, rate }: any) => {
                   </div>
                   <div
                     className={styles.imageContainer}
-                    onClick={() => handleMainImage(product.back)}
+                    onClick={() => {
+                      if (product.back) {
+                        handleMainImage(product.back);
+                      }
+                    }}
                   >
                     <img src={product?.back} width={85} />
                   </div>

@@ -3,6 +3,16 @@ import { useState, useEffect } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { DetailModal } from "../DetailModal";
 import { UseCategory } from "../../hooks";
+import type { CardProps } from "../../types";
+
+interface ProductForModal {
+  name: string;
+  type: string;
+  price: string;
+  front: string;
+  back: string | null;
+  size: string;
+}
 
 const Card = ({
   name,
@@ -13,11 +23,11 @@ const Card = ({
   size,
   rate,
   onlyFront
-}: Record<string, any>) => {
+}: CardProps) => {
   const { currentType } = UseCategory();
   const [currentImage, setCurrentImage] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<ProductForModal | null>(null);
 
   const handleMobile = (state: boolean) => setIsMobile(state);
 
@@ -28,7 +38,7 @@ const Card = ({
 
   useEffect(() => {
     const desktopMediaQuery = window.matchMedia("(max-width: 768px)");
-    desktopMediaQuery.addEventListener("change", (event) => {
+    const handleMediaChange = (event: MediaQueryListEvent) => {
       const { matches } = event;
       if (matches) {
         setCurrentImage(back ? "back" : "front");
@@ -37,41 +47,47 @@ const Card = ({
       }
       handleMobile(false);
       setCurrentImage("front");
-    });
+    };
+
+    desktopMediaQuery.addEventListener("change", handleMediaChange);
 
     if (window.innerWidth < 768) {
       handleMobile(true);
-      if (onlyFront) return setCurrentImage("front");
+      if (onlyFront) {
+        setCurrentImage("front");
+        return;
+      }
       setCurrentImage(back ? "back" : "front");
-
     }
 
     return () => {
-      desktopMediaQuery.removeEventListener("change", () => {});
+      desktopMediaQuery.removeEventListener("change", handleMediaChange);
     };
-  }, []);
+  }, [back, onlyFront]);
 
-  const selectProduct = () => {
-    const localProduct = { name, type, price, front, back, size };
+  const selectProduct = (): void => {
+    const localProduct: ProductForModal = { name, type, price, front, back, size };
     setProduct(localProduct);
   };
 
-  const handleClose = () => setProduct(null);
+  const handleClose = (): void => setProduct(null);
 
-  const handleStyles = () => {
+  const handleStyles = (): string | null => {
     if (!currentImage) return null;
     if (isMobile && currentType === "t-shirt" && onlyFront) return `${styles.InNoFade}`;
     if (isMobile && currentType === "t-shirt") return `${styles.outNoFade}`;
     if (currentImage === "back" && back && !isMobile) return styles.outImage;
     if (currentImage === "front" && back && !isMobile) return styles.inImage;
+    return null;
   };
 
-  const handleOut = () => {
+  const handleOut = (): string | null => {
     if (!currentImage) return null;
     if (isMobile && currentType === "t-shirt" && onlyFront) return `${styles.InNoFade}`;
     if (isMobile && currentType === "t-shirt") return `${styles.InNoFade}`;
     if (currentImage === "back" && back && !isMobile) return styles.inImage;
     if (currentImage === "front" && back && !isMobile) return styles.outImage;
+    return null;
   };
 
   return (

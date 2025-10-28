@@ -1,15 +1,17 @@
 ---
 import { contentfulClient } from "../../utils";
 import { ProductList } from "../../components/ProductList";
+import type { ContentfulProduct } from "../../types";
+import type { Entry, EntrySkeletonType } from "contentful";
 
-let data: any = [];
+let data: ContentfulProduct[] = [];
 
 try {
-  const { items } = await contentfulClient.getEntries<any>({
+  const { items } = await contentfulClient.getEntries<EntrySkeletonType>({
     content_type: "kuroClothes",
     order: ["fields.position"],
   });
-  data = items;
+  data = items as unknown as ContentfulProduct[];
 } catch (err) {
   return Astro.redirect("/404");
 }

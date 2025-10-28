@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "astro dev --host",
     "start": "astro dev --host",
-    "build": "astro check && astro build",
+    "build": "astro build",
+    "build:with-check": "NODE_OPTIONS='--max-old-space-size=4096' astro check && astro build",
+    "check": "NODE_OPTIONS='--max-old-space-size=4096' astro check",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "firebase deploy --only hosting"

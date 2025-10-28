@@ -1,15 +1,16 @@
 import { useState } from "preact/hooks";
 import styles from "./styles.module.scss";
 import { $productCategory } from "../../store/productCategory";
+import type { ProductCategory } from "../../types";
 
 export const Tabs = () => {
-  const [left, setLeft] = useState(0)
-  const [current, setCurrent] = useState(0);
+  const [left, setLeft] = useState<number>(0)
+  const [current, setCurrent] = useState<number>(0);
 
-  const handleCategory = (currentTab: number, category: string, left: number) => {
+  const handleCategory = (currentTab: number, category: ProductCategory, leftPosition: number): void => {
     $productCategory.set(category);
     setCurrent(currentTab);
-    setLeft(left)
+    setLeft(leftPosition);
   };
 
   return (

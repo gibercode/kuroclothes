@@ -1,10 +1,9 @@
 import styles from "./styles.module.scss";
+import type { SearchInputProps } from "../../types";
 
 export const SearchInput = ({
   handleChange,
-}: {
-  handleChange?: (event: any) => void;
-}) => {
+}: SearchInputProps) => {
   return (
     <div className={styles.main}>
       <div className={styles.inputContainer}>

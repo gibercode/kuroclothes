@@ -78,17 +78,19 @@
 </style>
 
 <script>
-  const element: HTMLElement | any = document.querySelector("#sidebar");
-  element.addEventListener("click", () => {
+  const element = document.querySelector<HTMLElement>("#sidebar");
+  element?.addEventListener("click", () => {
     element.classList.remove("translated");
   });
 
-  const elements: HTMLElement[] | any = document.getElementsByClassName("item");
-  Array.from(elements).forEach((item: any) => {
-    item.addEventListener("click", (event: any) => {
-      const target = event?.target?.id.replace("-", "");
-      const section: HTMLElement | any = document.querySelector(`#${target}`);
-      section.scrollIntoView({ behavior: "smooth" });
+  const elements: HTMLCollectionOf<Element> =
+    document.getElementsByClassName("item");
+  Array.from(elements).forEach((item: Element) => {
+    item.addEventListener("click", (event: Event) => {
+      const eventTarget = event?.target as HTMLElement;
+      const target = eventTarget?.id.replace("-", "");
+      const section = document.querySelector<HTMLElement>(`#${target}`);
+      section?.scrollIntoView({ behavior: "smooth" });
     });
   });
 </script>

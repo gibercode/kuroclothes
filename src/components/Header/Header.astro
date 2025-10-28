@@ -5,10 +5,10 @@ import Sidebar from "../Sidebar/Sidebar.astro";
 ---
 
 <script>
-  const elemento: HTMLElement | any = document.querySelector("#toggle");
-  elemento.addEventListener("click", function () {
-    const element: HTMLElement | any = document.querySelector("#sidebar");
-    element.classList.toggle("translated");
+  const elemento = document.querySelector<HTMLElement>("#toggle");
+  elemento?.addEventListener("click", function () {
+    const element = document.querySelector<HTMLElement>("#sidebar");
+    element?.classList.toggle("translated");
   });
 </script>
 

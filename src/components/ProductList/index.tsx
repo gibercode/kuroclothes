@@ -6,22 +6,23 @@ import { UseCategory } from "../../hooks/useCategory";
 import SearchInput from "../SearchInput";
 import type { JSX } from "preact";
 import { UseGetRate } from "../../hooks/useRate";
+import type { ContentfulProduct } from "../../types";
 
-export const ProductList = ({ initialData = [] }: { initialData: any }) => {
+export const ProductList = ({ initialData = [] }: { initialData: ContentfulProduct[] }) => {
   const { currentType } = UseCategory();
-  const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState(search);
+  const [products, setProducts] = useState<ContentfulProduct[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(search);
 
-  const filterProducts = (localProducts = []) => {
+  const filterProducts = (localProducts: ContentfulProduct[] = []) => {
     const result = localProducts.filter((item) => {
       const product = normalizeProduct(item);
       if (
         (product?.productType === currentType &&
           product?.name.toLowerCase().includes(search.toLowerCase())) ||
         (product?.productType === currentType &&
-          product?.tags.some((item: any) =>
-            item.includes(search.toLowerCase())
+          product?.tags.some((tag: string) =>
+            tag.toLowerCase().includes(search.toLowerCase())
           ))
       )
         return product;

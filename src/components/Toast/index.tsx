@@ -1,11 +1,7 @@
 import styles from "./styles.module.scss";
+import type { ToastProps } from "../../types";
 
-type ToastProps = {
-  text: string;
-  status: number;
-};
-
-const animation: Record<number, any> = {
+const animation: Record<number, string> = {
   0: styles.toast,
   1: styles.toastIn,
   2: styles.toastOut,
